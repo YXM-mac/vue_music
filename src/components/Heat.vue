@@ -6,25 +6,26 @@
 			<div class="hotopct">
 				<div class="heat_bg"></div>
 				<div class="hottime">
-				<p>更新日期：10月26日</p></div>
+				<p>更新日期：{{date}}</p></div>
 			</div>
     	</div>	
     </div>
 	<div class="hotcont">
 		<div class="hotcont_ul">
-			<a href="#" class="hotcont_liA">
+			<a href="#" class="hotcont_liA" v-for="track in tracks">
+			<!-- {{track}} -->
 				<span class="number">
 					01
 				</span>
 				<div class="remdli">
 					<div class="remd_left">
 						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
+						<p> {{track.name}} <!-- <span>电影《一代倾城逐浪花》主题曲</span> --></p>
 					</div>
 					<div class="desc">
 						<i class="desc_bg"></i>
 
-						<span>孔垂楠 - 碧波残梦</span>
+						<span>{{track.desc}}</span>
 					</div>
 				</div>
 
@@ -33,174 +34,8 @@
 					<span class="right_bg"></span>
 				</div>
 			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
 
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
 
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
-			<a href="#" class="hotcont_liA">
-				<span class="number">
-					01
-				</span>
-				<div class="remdli">
-					<div class="remd_left">
-						<div class="name">
-						<p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-					</div>
-					<div class="desc">
-						<i class="desc_bg"></i>
-
-						<span>孔垂楠 - 碧波残梦</span>
-					</div>
-				</div>
-
-				</div>
-				<div class="remd_right">
-					<span class="right_bg"></span>
-				</div>
-			</a>
 		</div>
 	</div>
 	<div class="hotfooter">
@@ -213,12 +48,17 @@
 
 <script>
 
+import datas from '../assets/data/api-2.json'
 export default {
   name: 'Heat',
   data () {
     return {
       msg: 'Welcome Heat'
     }
+  },
+  created () {
+    this.tracks = datas.result.playlist.tracks
+    this.date = datas.result.playlist.date
   }
 }
 </script>
@@ -283,9 +123,11 @@ export default {
 }
 .desc span{
   font-size: 12px;
+  text-indent: 25px;
+  padding-top: 3px;
 }
-.name p,.remd_li{
-  width: 260px;
+.name p,.remd_li,.desc span{
+  width: 250px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -308,6 +150,7 @@ export default {
   align-items: center;
   padding: 0 10px;  
 }
+
 .right_bg{
   display: inline-block;
   width: 22px;
@@ -318,13 +161,14 @@ export default {
 }
 
 .desc_bg{
+  position: absolute;
   display: inline-block;
   width: 22px;
   height: 22px;
   background-position: -24px 0;
-  background: url(../assets/bg.png) no-repeat 0px 0;
+  background: url(../assets/bg.png) no-repeat;
   background-size: 166px 97px;
-  background-position: 5px 12px;
+  background-position: 5px 7px;
 }
 .hotfooter{
 	height: 55px;

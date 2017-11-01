@@ -24,6 +24,16 @@ const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const proxyTable = config.dev.proxyTable
 
 const app = express()
+var appDate = require('../src/assets/data/api-1.json');
+var appDates = require('../src/assets/data/api-2.json');
+var appDates3 = require('../src/assets/data/api-3.json');
+var appDates4 = require('../src/assets/data/api-4.json');
+var apiRoutes = express.Router();
+app.use('/recommend',apiRoutes);
+// app.use('/heat',apiRoutes);
+// app.use('/search',apiRoutes);
+// app.use('/recommend',apiRoutes);
+
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {

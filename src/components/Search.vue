@@ -12,10 +12,10 @@
         <section class="default-title">
           <h3>热门搜索</h3>
           <ul class="list">
-            <li class="item">
-              <a href="#">石头计划</a>
+            <li class="item" v-for="hot in hots">
+              <a href="#">{{hot.first}}</a>
             </li>
-            <li class="item">
+           <!--  <li class="item">
               <a href="#">石计划</a>
             </li>
             <li class="item">
@@ -29,11 +29,11 @@
             </li>
             <li class="item">
               <a href="#">asdgddfg</a>
-            </li>
+            </li> -->
           </ul>
         </section>
 
-        <section class="default-content">
+       <!--  <section class="default-content">
           <ul class="list">
             <li class="item">
               <i class="histy"></i>
@@ -61,18 +61,23 @@
               <i class="close"></i>
             </li>
           </ul>
-        </section>
+        </section> -->
     </div>
   </div>
 </template>
 
 <script>
+import datas from '../assets/data/api-3.json'
 export default {
   name: 'Search',
   data () {
     return {
       msg: 'Welcome search'
     }
+  },
+  created () {
+    this.hots = datas.result.hots
+    // this.date = datas.result.playlist.date
   }
 }
 </script>

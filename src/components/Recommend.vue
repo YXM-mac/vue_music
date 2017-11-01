@@ -1,16 +1,17 @@
 <template>
   <div class="Recommend">
     <!-- <h1>{{ msg }}</h1> -->
+    <!-- {{musics}} -->
     <div class="tabctitem">
       <div class="m-homeremd">
         <h2 class="remd_tl">推荐歌单</h2>
         <div class="remd_ul">
-          <div class="remd_li">
-            <img src="http://p1.music.126.net/AjFdWxfw0usRWK7KxQOThw==/19134800858593146.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="jpg">
-            <span class="u-earp remd_lnum">311.7万</span>
-            <p>华语速爆新歌</p>
+          <div class="remd_li" v-for="music in musics">
+            <img :src="music.pic" alt="jpg">
+            <span class="u-earp remd_lnum">{{music.num}}</span>
+            <p>{{music.name}}</p>
           </div>
-          <div class="remd_li">
+          <!-- <div class="remd_li">
             <img src="http://p1.music.126.net/n-k3rxbuHClkiSpmh3I9Sw==/109951163050826183.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="jpg">
             <span class="u-earp remd_lnum">311.7万</span>
             <p>沐浴音符 | 听着音乐洗澡才是讲究人</p>
@@ -36,7 +37,7 @@
             <img src="http://p1.music.126.net/gA6MMdcY7WRNm0bs3W4E7w==/18651015743968707.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="jpg">
             <span class="u-earp remd_lnum">311.7万</span>
             <p>倾听自然 · 海之遐想</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -44,54 +45,17 @@
     <div class="tabctitem">
       <div class="m-homeremd">
         <h2 class="remd_tl">最新音乐</h2>
+<!-- {{newsongs}} -->
 
-        <a href="#" class="box_a">
+        <a href="#" class="box_a" v-for="newsong in newsongs">
           <div class="remdli">
             <div class="remd_left">
               <div class="name">
-                <p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
+                <p> {{newsong.name}} <span></span></p>
               </div>
               <div class="desc">
               <i class="desc_bg"></i>
-                <span>孔垂楠 - 碧波残梦</span>
-              </div>
-            </div>
-
-          </div>
-            <div class="remd_right">
-              <span class="right_bg"></span>
-            </div>
-
-        </a>
-        <a href="#" class="box_a">
-          <div class="remdli">
-            <div class="remd_left">
-              <div class="name">
-                <p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-              </div>
-              <div class="desc">
-              <i class="desc_bg"></i>
-                
-                <span>孔垂楠 - 碧波残梦</span>
-              </div>
-            </div>
-
-          </div>
-            <div class="remd_right">
-              <span class="right_bg"></span>
-            </div>
-
-        </a>
-        <a href="#" class="box_a">
-          <div class="remdli">
-            <div class="remd_left">
-              <div class="name">
-                <p> 碧波残梦 <span>电影《一代倾城逐浪花》主题曲</span></p>
-              </div>
-              <div class="desc">
-              <i class="desc_bg"></i>
-                
-                <span>孔垂楠 - 碧波残梦</span>
+                <span>{{newsong.desc}}</span>
               </div>
             </div>
 
@@ -100,6 +64,7 @@
               <span class="right_bg"></span>
             </div>
         </a>
+
       </div>
     </div>
 
@@ -147,13 +112,19 @@
 
 <script>
 
+import datas from '../assets/data/api-1.json'
+
 export default {
   name: 'Recommend',
   data () {
     return {
-      msg: 'Welcome Recommend'
-      // itemList: []
+      msg: 'Welcome search'
     }
+  },
+  created () {
+    this.musics = datas.result.recommendsong
+    this.newsongs = datas.result.newsong
+  }
   // },
   // mounted: function () {
   //   this.getData()
@@ -165,7 +136,7 @@ export default {
   //       console.log(res)
   //     })
   //   }
-  }
+  // }
 }
 </script>
 
@@ -192,10 +163,11 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-bottom: 16px;
 }
 .remd_li{
-  width: 33.3%;
+  width: 104px;
   font-size: 13px;
   line-height: 1.2;
   padding: 6px 3px 0;
@@ -204,7 +176,9 @@ export default {
 }
 
 .remd_li img{
-  width: 100%;
+  width: 104px;
+  /*width: 100%;*/
+  /*width: 33.3%;*/
 }
 .remd_lnum{
     position: absolute;
@@ -239,15 +213,17 @@ export default {
 }
 .desc span{
   font-size: 12px;
+  text-indent: 25px;
+  padding-top: 3px;
 }
-.name p,.remd_li{
-  width: 260px;
+.name p,.remd_li,.desc span {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.name p{
+.name p,.desc span {
+  width: 250px;
   -webkit-line-clamp: 1;
 }
 
@@ -257,8 +233,6 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .remd_right{
   height: 100%;
@@ -277,13 +251,14 @@ export default {
 }
 
 .desc_bg{
+  position: absolute;
   display: inline-block;
   width: 22px;
   height: 22px;
   background-position: -24px 0;
-  background: url(../assets/bg.png) no-repeat 0px 0;
+  background: url(../assets/bg.png) no-repeat;
   background-size: 166px 97px;
-  background-position: 5px 12px;
+  background-position: 5px 7px;
 }
 
 
