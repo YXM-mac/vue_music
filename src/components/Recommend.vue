@@ -11,6 +11,7 @@
             <span class="u-earp remd_lnum">{{music.num}}</span>
             <p>{{music.name}}</p>
           </div>
+          
           <!-- <div class="remd_li">
             <img src="http://p1.music.126.net/n-k3rxbuHClkiSpmh3I9Sw==/109951163050826183.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="jpg">
             <span class="u-earp remd_lnum">311.7万</span>
@@ -54,7 +55,7 @@
                 <p> {{newsong.name}} <span></span></p>
               </div>
               <div class="desc">
-              <i class="desc_bg"></i>
+              <i class="desc_bg" v-show="newsong.sq"></i>
                 <span>{{newsong.desc}}</span>
               </div>
             </div>

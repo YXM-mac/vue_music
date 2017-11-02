@@ -12,10 +12,14 @@
     </div>
 	<div class="hotcont">
 		<div class="hotcont_ul">
-			<a href="#" class="hotcont_liA" v-for="track in tracks">
+			<a href="#" class="hotcont_liA" v-for="(track,index) in tracks">
 			<!-- {{track}} -->
-				<span class="number">
-					01
+
+				<span class="number" v-if ="index < 3" style="color: #df3436;">
+					{{index+1 < 10 ? '0' + (index+1)  : index+1}}
+				</span>
+				<span class="number" v-else>
+					{{index+1 < 10 ? '0' + (index+1)  : index+1}}
 				</span>
 				<div class="remdli">
 					<div class="remd_left">
@@ -23,8 +27,7 @@
 						<p> {{track.name}} <!-- <span>电影《一代倾城逐浪花》主题曲</span> --></p>
 					</div>
 					<div class="desc">
-						<i class="desc_bg"></i>
-
+						<i class="desc_bg" v-show="track.sq"></i>
 						<span>{{track.desc}}</span>
 					</div>
 				</div>

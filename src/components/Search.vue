@@ -4,80 +4,97 @@
       <form action="" class="m-input">
       <div class="inputcover">
         <i></i>
-        <input type="text" placeholder="搜索歌曲、歌手、专辑">
+        <input type="text" placeholder="搜索歌曲、歌手、专辑" v-model="newsearch" v-on:keyup.enter="addNew()">
       </div>
       </form>
     </div>
-    <div class="m-default">
+<!-- {{newsearch}} v-if="newsearch != 音乐"-->
+    <div class="m-default"  v-bind:class="classNone">
         <section class="default-title">
           <h3>热门搜索</h3>
           <ul class="list">
             <li class="item" v-for="hot in hots">
               <a href="#">{{hot.first}}</a>
             </li>
-           <!--  <li class="item">
-              <a href="#">石计划</a>
-            </li>
-            <li class="item">
-              <a href="#">石头计dsfsdfsdsdf划</a>
-            </li>
-            <li class="item">
-              <a href="#">dddddddddd</a>
-            </li>
-            <li class="item">
-              <a href="#">asdgdfsdg</a>
-            </li>
-            <li class="item">
-              <a href="#">asdgddfg</a>
-            </li> -->
           </ul>
         </section>
 
-       <!--  <section class="default-content">
-          <ul class="list">
-            <li class="item">
+        <section class="default-content">
+          <ul class="list" v-if="searchall !== null">
+            <li class="item" v-for="s in searchall" v-show="s.isfinished">
               <i class="histy"></i>
-              <span>Taylor Swift</span>
-              <i class="close"></i>
-            </li>
-            <li class="item">
-              <i class="histy"></i>
-              <span>Taylor Swift</span>
-              <i class="close"></i>
-            </li>
-            <li class="item">
-              <i class="histy"></i>
-              <span>Taylor Swift</span>
-              <i class="close"></i>
-            </li>
-            <li class="item">
-              <i class="histy"></i>
-              <span>Taylor Swift</span>
-              <i class="close"></i>
-            </li>
-            <li class="item">
-              <i class="histy"></i>
-              <span>Taylor Swift</span>
-              <i class="close"></i>
+              <span>{{s.content}}</span>
+              <i class="close" v-on:click="removeTodo($index)"></i>
             </li>
           </ul>
-        </section> -->
+          <ul v-else></ul>
+        </section>
     </div>
+    
+ <!-- v-else-if="newsearch == 音乐" -->
+    <div class="hotcont" v-bind:class="classObject">
+      <div class="hotcont_ul">
+        <a href="#" class="hotcont_liA" v-for="track in tracks">
+          <div class="remdli">
+            <div class="remd_left">
+              <div class="name">
+              <p> {{track.name}} <!-- <span>电影《一代倾城逐浪花》主题曲</span> --></p>
+            </div>
+            <div class="desc">
+              <i class="desc_bg" v-show="track.sq"></i>
+              <span>{{track.desc}}</span>
+            </div>
+          </div>
+
+          </div>
+          <div class="remd_right">
+            <span class="right_bg"></span>
+          </div>
+        </a>
+
+
+      </div>
+    </div>
+    <!-- <div v-else></div> -->
   </div>
 </template>
 
 <script>
 import datas from '../assets/data/api-3.json'
+import searchdata from '../assets/data/api-4.json'
+// console.log(Store)
 export default {
   name: 'Search',
   data () {
     return {
-      msg: 'Welcome search'
+      msg: 'Welcome search',
+      searchall: [],
+      newsearch: '',
+      classObject: 'display',
+      classNone: ''
     }
   },
   created () {
     this.hots = datas.result.hots
-    // this.date = datas.result.playlist.date
+    this.tracks = searchdata.result.tracks
+    this.key = searchdata.result.key
+  },
+  methods: {
+    removeTodo: function (index) {
+      this.searchall.splice(index, 1)
+    },
+    addNew: function () {
+      // console.log(this.newsearch)
+      if (this.newsearch === '音乐') {
+        this.classObject = ''
+        this.classNone = 'display'
+      }
+      this.searchall.push({
+        content: this.newsearch,
+        isfinished: true
+      })
+      this.newsearch = ''
+    }
   }
 }
 </script>
@@ -91,6 +108,9 @@ export default {
   .m-input{
     padding: 15px 10px;
     border-bottom: 1px solid rgba(0,0,0,.1);
+  }
+  .display{
+    display: none;
   }
   .inputcover{
     position: relative;
@@ -187,4 +207,67 @@ export default {
     height: 12px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjOTk5ODk5IiBkPSJtMTMuMzc5IDEybDEwLjMzOCAxMC4zMzdjLjM4MS4zODEuMzgxLjk5OCAwIDEuMzc5cy0uOTk4LjM4MS0xLjM3OCAwbC0xMC4zMzgtMTAuMzM4LTEwLjMzOCAxMC4zMzhjLS4zOC4zODEtLjk5Ny4zODEtMS4zNzggMHMtLjM4MS0uOTk4IDAtMS4zNzlsMTAuMzM4LTEwLjMzNy0xMC4zMzgtMTAuMzM4Yy0uMzgxLS4zOC0uMzgxLS45OTcgMC0xLjM3OHMuOTk4LS4zODEgMS4zNzggMGwxMC4zMzggMTAuMzM4IDEwLjMzOC0xMC4zMzhjLjM4LS4zODEuOTk3LS4zODEgMS4zNzggMHMuMzgxLjk5OCAwIDEuMzc4bC0xMC4zMzggMTAuMzM4Ii8+PC9zdmc+);
   }
+
+.hotcont_liA{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 55px;
+  padding: 5px 0 5px 10px ;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  color: #333;
+
+}
+
+.name{
+  font-size: 17px;
+}
+.name span,.desc span{
+  color:#888;
+}
+.desc span{
+  font-size: 12px;
+  text-indent: 25px;
+  padding-top: 3px;
+}
+.name p,.remd_li,.desc span{
+  width: 250px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.remdli{
+  width: 78%;
+  height: 22px;
+  display: flex;
+  justify-content: space-between;
+}
+.remd_right{
+  height: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0 10px;  
+}
+
+.right_bg{
+  display: inline-block;
+  width: 22px;
+  height: 22px; 
+  background: url(../assets/bg.png) no-repeat;
+  background-position: -24px 0;
+  background-size: 166px 97px;
+}
+
+.desc_bg{
+  position: absolute;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-position: -24px 0;
+  background: url(../assets/bg.png) no-repeat;
+  background-size: 166px 97px;
+  background-position: 5px 7px;
+}
 </style>

@@ -14,7 +14,7 @@
     </div>
 
     <div class="menu">
-      <router-link to="/recommend"><span v-bind:class="{border:$route.matched[0].path === '/recommend'}">推荐音乐</span></router-link>
+      <router-link to="/"><span v-bind:class="{border:$route.matched[0].path === ''}">推荐音乐</span></router-link>
       <router-link to="/heat"><span v-bind:class="{border:$route.matched[0].path === '/heat'}">热歌榜</span></router-link>
       <router-link to="/search"><span v-bind:class="{border:$route.matched[0].path === '/search'}">搜索</span></router-link>
     </div>
