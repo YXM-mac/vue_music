@@ -3,8 +3,9 @@
     <div class="m-hmsrch">
       <form action="" class="m-input">
       <div class="inputcover">
-        <i></i>
+        <i class="closei a"></i>
         <input type="text" placeholder="搜索歌曲、歌手、专辑" v-model="newsearch" v-on:keyup.enter="addNew()">
+        <i class="closei b" v-on:click="reutnF"  v-bind:class="classObject"></i>
       </div>
       </form>
     </div>
@@ -21,10 +22,10 @@
 
         <section class="default-content">
           <ul class="list" v-if="searchall !== null">
-            <li class="item" v-for="s in searchall" v-show="s.isfinished">
+            <li class="item" v-for="(s,index) in searchall" v-show="s.isfinished">
               <i class="histy"></i>
               <span>{{s.content}}</span>
-              <i class="close" v-on:click="removeTodo($index)"></i>
+              <i class="close" v-on:click="removeTodo(index)"></i>
             </li>
           </ul>
           <ul v-else></ul>
@@ -72,6 +73,7 @@ export default {
       newsearch: '',
       classObject: 'display',
       classNone: ''
+      // ccCc: 'display'
     }
   },
   created () {
@@ -83,9 +85,13 @@ export default {
     removeTodo: function (index) {
       this.searchall.splice(index, 1)
     },
+    reutnF: function () {
+      this.classObject = 'display'
+      this.classNone = ''
+    },
     addNew: function () {
       // console.log(this.newsearch)
-      if (this.newsearch === '音乐') {
+      if (this.newsearch !== null) {
         this.classObject = ''
         this.classNone = 'display'
       }
@@ -121,16 +127,27 @@ export default {
     background: #ebecec;
     border-radius: 30px;
   }
-  .inputcover i{
+  .closei{
     position: absolute;
-    left: 0;
-    top: 9px;
+    
     margin: 0 8px;
     vertical-align: middle;
     width: 13px;
     height: 13px;
+  }
+  .a{
+    left: 0;
+    top: 9px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNiAyNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjYzljOWNhIiBkPSJNMjUuMTgxLDIzLjUzNWwtMS40MTQsMS40MTRsLTcuMzE1LTcuMzE0CgkJQzE0LjcwOSwxOS4xMDcsMTIuNDYsMjAsMTAsMjBDNC40NzcsMjAsMCwxNS41MjMsMCwxMEMwLDQuNDc3LDQuNDc3LDAsMTAsMGM1LjUyMywwLDEwLDQuNDc3LDEwLDEwYzAsMi4zNDItMC44MTEsNC40OS0yLjE2LDYuMTk1CgkJTDI1LjE4MSwyMy41MzV6IE0xMCwyYy00LjQxOCwwLTgsMy41ODItOCw4czMuNTgyLDgsOCw4YzQuNDE4LDAsOC0zLjU4Miw4LThTMTQuNDE4LDIsMTAsMnoiLz48L3N2Zz4=);
   }
+  .b{
+    right: 0;
+    top: 9px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOCAyOCI+PGcgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBmaWxsPSIjYmNiZGJkIiBkPSJNMTQsMGM3LjczMiwwLDE0LDYuMjY4LDE0LDE0YzAsNy43MzItNi4yNjgsMTQtMTQsMTQKCVMwLDIxLjczMiwwLDE0QzAsNi4yNjgsNi4yNjgsMCwxNCwweiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ViZWNlYiIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCI+PHBhdGggZD0ibTE5IDlsLTEwIDEwIi8+PHBhdGggZD0ibTkgOWwxMCAxMCIvPjwvZz48L2c+PC9zdmc+);
+
+    
+  }
+
   .inputcover input{
     height: 30px;
     width: 100%;
@@ -200,13 +217,15 @@ export default {
     height: 15px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjYzljYWNhIiBkPSJtMTUgMzBjLTguMjg0IDAtMTUtNi43MTYtMTUtMTVzNi43MTYtMTUgMTUtMTUgMTUgNi43MTYgMTUgMTUtNi43MTYgMTUtMTUgMTVtMC0yOGMtNy4xOCAwLTEzIDUuODItMTMgMTNzNS44MiAxMyAxMyAxMyAxMy01LjgyIDEzLTEzLTUuODItMTMtMTMtMTNtNyAxNmgtOGMtLjU1MiAwLTEtLjQ0Ny0xLTF2LTEwYzAtLjU1My40NDgtMSAxLTFzMSAuNDQ3IDEgMXY5aDdjLjU1MyAwIDEgLjQ0NyAxIDFzLS40NDcgMS0xIDEiLz48L3N2Zz4=);
   }
-   .default-content .close{
+  
+  .close{
     float: right;
     line-height: 32px;
     width: 12px;
     height: 12px;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjOTk5ODk5IiBkPSJtMTMuMzc5IDEybDEwLjMzOCAxMC4zMzdjLjM4MS4zODEuMzgxLjk5OCAwIDEuMzc5cy0uOTk4LjM4MS0xLjM3OCAwbC0xMC4zMzgtMTAuMzM4LTEwLjMzOCAxMC4zMzhjLS4zOC4zODEtLjk5Ny4zODEtMS4zNzggMHMtLjM4MS0uOTk4IDAtMS4zNzlsMTAuMzM4LTEwLjMzNy0xMC4zMzgtMTAuMzM4Yy0uMzgxLS4zOC0uMzgxLS45OTcgMC0xLjM3OHMuOTk4LS4zODEgMS4zNzggMGwxMC4zMzggMTAuMzM4IDEwLjMzOC0xMC4zMzhjLjM4LS4zODEuOTk3LS4zODEgMS4zNzggMHMuMzgxLjk5OCAwIDEuMzc4bC0xMC4zMzggMTAuMzM4Ii8+PC9zdmc+);
   }
+
 
 .hotcont_liA{
   display: flex;
