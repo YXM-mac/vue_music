@@ -5,12 +5,12 @@
       <div class="inputcover">
         <i class="closei a"></i>
         <input type="text" placeholder="搜索歌曲、歌手、专辑" v-model="newsearch" v-on:keyup.enter="addNew()">
-        <i class="closei b" v-on:click="reutnF"  v-bind:class="classObject"></i>
+        <i class="closei b" v-on:click="reutnF" v-show="newsearch"></i>
       </div>
       </form>
     </div>
 <!-- {{newsearch}} v-if="newsearch != 音乐"-->
-    <div class="m-default"  v-bind:class="classNone">
+    <div class="m-default" v-show="isShow">
         <section class="default-title">
           <h3>热门搜索</h3>
           <ul class="list">
@@ -24,7 +24,7 @@
           <ul class="list" v-if="searchall !== null">
             <li class="item" v-for="(s,index) in searchall" v-show="s.isfinished">
               <i class="histy"></i>
-              <span>{{s.content}}</span>
+              <span>{{s.content}}{{index}}</span>
               <i class="close" v-on:click="removeTodo(index)"></i>
             </li>
           </ul>
@@ -33,7 +33,7 @@
     </div>
     
  <!-- v-else-if="newsearch == 音乐" -->
-    <div class="hotcont" v-bind:class="classObject">
+    <div class="hotcont" v-show="!isShow">
       <div class="hotcont_ul">
         <a href="#" class="hotcont_liA" v-for="track in tracks">
           <div class="remdli">
@@ -52,8 +52,6 @@
             <span class="right_bg"></span>
           </div>
         </a>
-
-
       </div>
     </div>
     <!-- <div v-else></div> -->
@@ -71,9 +69,7 @@ export default {
       msg: 'Welcome search',
       searchall: [],
       newsearch: '',
-      classObject: 'display',
-      classNone: ''
-      // ccCc: 'display'
+      isShow: true
     }
   },
   created () {
@@ -82,25 +78,47 @@ export default {
     this.key = searchdata.result.key
   },
   methods: {
+    localSave: function (searchall) {
+      if (window.localStorage) {
+        window.localStorage.setItem('searchall', JSON.stringify(searchall))
+      }
+    },
     removeTodo: function (index) {
       this.searchall.splice(index, 1)
+      this.localSave(this.searchall)
     },
     reutnF: function () {
-      this.classObject = 'display'
-      this.classNone = ''
+      this.newsearch = ''
+      if (this.newsearch === '') {
+        this.isShow = true
+      } else {
+        this.isShow = !this.isShow
+      }
     },
     addNew: function () {
-      // console.log(this.newsearch)
-      if (this.newsearch !== null) {
-        this.classObject = ''
-        this.classNone = 'display'
-      }
-      this.searchall.push({
+      this.isShow = !this.isShow
+      let obj = {
+        // index: i++,
         content: this.newsearch,
         isfinished: true
-      })
-      this.newsearch = ''
+      }
+      this.searchall.push(obj)
+      this.localSave(this.searchall)
+      return false
+      // this.newsearch = ''
     }
+  },
+  width: {
+    searchall: {
+      handler: function (searchall) {
+        // console.log(searchall)
+        this.localSave(searchall)
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    this.searchall = JSON.parse(window.localStorage.getItem('searchall') || '[]')
   }
 }
 </script>
@@ -150,7 +168,7 @@ export default {
 
   .inputcover input{
     height: 30px;
-    width: 100%;
+    width: 89%;
     font-size: 14px;
     line-height: 18px;
     background: transparent;

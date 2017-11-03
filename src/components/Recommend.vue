@@ -168,7 +168,7 @@ export default {
   padding-bottom: 16px;
 }
 .remd_li{
-  width: 104px;
+  width: 33.3%;
   font-size: 13px;
   line-height: 1.2;
   padding: 6px 3px 0;
@@ -177,9 +177,7 @@ export default {
 }
 
 .remd_li img{
-  width: 104px;
-  /*width: 100%;*/
-  /*width: 33.3%;*/
+  width: 100%;
 }
 .remd_lnum{
     position: absolute;
